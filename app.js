@@ -2,7 +2,6 @@
     'use strict';
     angular.module('ShoppingListApp', [])
         .controller('ShoppingListController', ShoppingListController)
-        .controller('ShoppingListController2', ShoppingListController2)
         .provider('ShoppingListService', ShoppingListServiceProvider);
 
     function ShoppingListService(maxItems) {
@@ -46,15 +45,10 @@
     function ShoppingListController(ShoppingListService) {
         let list1 = this;
         list1.items = ShoppingListService.getItems();
+        list1.boughtItems = ShoppingListService.getBoughtItems();
 
         list1.removeItem = function (itemIndex) {
             ShoppingListService.removeItem(itemIndex);
         };
-    };
-
-    ShoppingListController2.$inject = ['ShoppingListService'];
-    function ShoppingListController2(ShoppingListService) {
-        let list2 = this;
-        list2.items = ShoppingListService.getBoughtItems();
     };
 })();
